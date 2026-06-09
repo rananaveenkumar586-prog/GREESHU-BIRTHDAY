@@ -1,0 +1,1 @@
+﻿window.BIRTHDAY_MUSIC = [];

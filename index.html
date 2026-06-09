@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Birthday Surprise for SIRIPURAM GREESHMA GOVIND</title>
+    <link rel="stylesheet" href="styles.css?v=6" />
+  </head>
+  <body>
+    <canvas id="fxCanvas" aria-hidden="true"></canvas>
+
+    <audio id="softBell" preload="auto"></audio>
+
+    <main class="app-shell">
+      <section id="welcomeScreen" class="screen welcome-screen is-active">
+        <div class="aurora"></div>
+        <div class="welcome-content">
+          <p class="eyebrow">For SIRIPURAM GREESHMA GOVIND</p>
+          <h1>A Special Journey Awaits You...</h1>
+          <p class="welcome-copy">A little world of wishes, memories, stars, gifts, photos, and birthday magic.</p>
+          <button class="primary-btn" id="beginBtn" type="button">Begin the surprise</button>
+        </div>
+      </section>
+
+      <section id="unlockScreen" class="screen unlock-screen">
+        <div class="unlock-card">
+          <p class="eyebrow">Secret birthday key</p>
+          <h2>Enter your birthday date</h2>
+          <p class="hint">Use format <strong>DDMMYYYY</strong>. You can change the password in <code>script.js</code>.</p>
+          <label class="password-field">
+            <span>Birthday password</span>
+            <input id="passwordInput" type="password" inputmode="numeric" autocomplete="off" placeholder="DDMMYYYY" />
+          </label>
+          <p id="unlockError" class="error-text" role="alert"></p>
+          <button class="primary-btn" id="unlockBtn" type="button">Unlock Surprise</button>
+        </div>
+      </section>
+
+      <section id="journeyScreen" class="screen journey-screen">
+        <nav class="topbar">
+          <button class="icon-btn" id="musicToggle" type="button" aria-label="Play or pause music">♪</button>
+          <span>Greeshma's Birthday Journey</span>
+          <button class="icon-btn" id="nextSectionBtn" type="button" aria-label="Next section">↓</button>
+        </nav>
+
+        <section class="hero-panel">
+          <div>
+            <p class="eyebrow">Happy birthday in advance</p>
+            <h2>Every screen has a small smile waiting for you.</h2>
+            <p>Made with warm wishes for happiness, success, good health, and memories that stay bright for years.</p>
+          </div>
+          <div class="photo-orbit" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </section>
+
+        <section class="section countdown-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Birthday countdown</p>
+            <h2>The moment is getting closer</h2>
+          </div>
+          <div class="countdown-grid" id="countdownGrid">
+            <div><strong id="days">00</strong><span>Days</span></div>
+            <div><strong id="hours">00</strong><span>Hours</span></div>
+            <div><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div><strong id="seconds">00</strong><span>Seconds</span></div>
+          </div>
+          <p id="countdownMessage" class="soft-note">Set her exact birthday in <code>script.js</code> for a perfect countdown.</p>
+        </section>
+
+        <section class="section timeline-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Memory journey</p>
+            <h2>Little chapters of a beautiful person</h2>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+
+        <section class="section hunt-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Treasure hunt</p>
+            <h2>Answer and unlock birthday notes</h2>
+          </div>
+          <div class="quiz-card">
+            <p id="quizQuestion"></p>
+            <div id="quizOptions" class="quiz-options"></div>
+            <p id="quizResult" class="soft-note"></p>
+          </div>
+        </section>
+
+        <section class="section gift-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Virtual gift</p>
+            <h2>Tap the gift box</h2>
+          </div>
+          <button id="giftBox" class="gift-box" type="button" aria-label="Open birthday gift">
+            <span class="gift-lid"></span>
+            <span class="gift-body"></span>
+            <span class="gift-ribbon"></span>
+          </button>
+          <div id="giftWish" class="gift-wish" aria-live="polite"></div>
+        </section>
+
+        <section class="section stars-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Starry sky wishes</p>
+            <h2>Tap a star for a hidden compliment</h2>
+          </div>
+          <div id="starSky" class="star-sky"></div>
+          <p id="starMessage" class="star-message">Choose any glowing star.</p>
+        </section>
+
+        <section class="section candle-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Candle wish</p>
+            <h2>Stop the candle flame</h2>
+          </div>
+          <div class="candle-playground">
+            <button id="candleCakeBtn" class="wish-cake" type="button" aria-label="Stop birthday candle">
+              <span class="wish-flame"></span>
+              <span class="wish-candle"></span>
+              <span class="wish-cake-top"></span>
+              <span class="wish-cake-base"></span>
+            </button>
+            <div id="candleNotes" class="candle-notes" aria-live="polite">
+              <p>Tap the candle to reveal a sweet note.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section balloon-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Balloon wishes</p>
+            <h2>Pop balloons for cute words</h2>
+          </div>
+          <div id="balloonWall" class="balloon-wall" aria-live="polite"></div>
+          <p id="balloonMessage" class="balloon-message">Tap any balloon.</p>
+        </section>
+
+        <section class="section gallery-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Photo gallery</p>
+            <h2>Upload favorite photos</h2>
+          </div>
+          <label class="upload-control">
+            <span>Choose photos</span>
+            <input id="photoUpload" type="file" accept="image/*" multiple />
+          </label>
+          <div class="gallery-stage">
+            <button class="gallery-btn" id="prevPhoto" type="button" aria-label="Previous photo">‹</button>
+            <figure class="photo-frame">
+              <div id="photoSlide" class="photo-slide"></div>
+              <figcaption id="photoCaption"></figcaption>
+            </figure>
+            <button class="gallery-btn" id="nextPhoto" type="button" aria-label="Next photo">›</button>
+          </div>
+        </section>
+
+        <section class="section letter-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Birthday letter</p>
+            <h2>A note written slowly, just for her</h2>
+          </div>
+          <article class="letter-paper">
+            <p id="letterText"></p>
+          </article>
+        </section>
+
+        <section class="section music-section" data-section>
+          <div class="section-heading">
+            <p class="eyebrow">Music player</p>
+            <h2>Soft background melody</h2>
+          </div>
+          <div class="music-player">
+            <button class="primary-btn" id="playerBtn" type="button">Pause music</button>
+            <p id="musicStatus" class="soft-note">Music starts automatically after unlock.</p>
+          </div>
+        </section>
+
+        <section class="section final-section" data-section>
+          <div class="final-copy">
+            <p class="eyebrow">Final surprise</p>
+            <h2>Happy Birthday, Greeshma.</h2>
+            <p>May your life be filled with happiness, success, good health, and beautiful memories.</p>
+            <button class="primary-btn" id="fireworksBtn" type="button">Launch fireworks</button>
+          </div>
+          <div class="cake-scene" aria-label="3D rotating birthday cake">
+            <div class="cake">
+              <span class="candle"></span>
+              <span class="flame"></span>
+              <div class="cake-top"></div>
+              <div class="cake-mid"></div>
+              <div class="cake-base"></div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="images-manifest.js?v=6"></script>
+    <script src="music-manifest.js?v=6"></script>
+    <script src="script.js?v=6"></script>
+  </body>
+</html>
